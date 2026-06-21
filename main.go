@@ -151,8 +151,8 @@ func query(id int){
 	var inpt string
 
 	stdScnr := bufio.NewScanner(os.Stdin)
-	isCrr := true 
 	for{
+		isCrr := true 
 		os.Remove("./generated/gene.c")
 		geneFi, err := os.OpenFile(
 			"./generated/gene.c",
@@ -192,6 +192,7 @@ func query(id int){
 		)
 
 		if err := cpil.Run(); err != nil {
+			fmt.Println("ERROR ON195", err)
 			continue
 		}
 
@@ -236,5 +237,6 @@ func query(id int){
 			fmt.Println("CORRECT!", len(rslt), len(targ))
 			break
 		}
+		fmt.Println("WA", rslt, targ)
 	}
 }
