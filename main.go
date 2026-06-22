@@ -9,7 +9,7 @@ import(
 	"bufio"
 )
 
-const ROUND = 1
+const ROUND = 2
 
 func main(){
 	
@@ -125,33 +125,38 @@ func query(id int){
 	*/
 	hole := rand.N(len(src)-7)+4 
 
-	for i := range src {
-		for _, ch := range src[i] {
-			if ch == '\t' {
-				fmt.Printf("  ")
-			} else {
-				break
-			}
-		}
-
-		if i != hole {
-			for _, ch := range src[i] {
-				if ch != '\t' {
-					fmt.Printf("%c", ch)
-				}
-			}
-			fmt.Println()
-			continue
-		}
-
-		fmt.Println("/* ======[ WHAT PROGRAM DOES FIT IN HERE ? ]====== */")
-	}
-	fmt.Printf("\n\n")
 
 	var inpt string
 
 	stdScnr := bufio.NewScanner(os.Stdin)
 	for{
+
+
+		for i := range src {
+			for _, ch := range src[i] {
+				if ch == '\t' {
+					fmt.Printf("  ")
+				} else {
+					break
+				}
+			}
+
+			if i != hole {
+				for _, ch := range src[i] {
+					if ch != '\t' {
+						fmt.Printf("%c", ch)
+					}
+				}
+				fmt.Println()
+				continue
+			}
+
+			fmt.Println("/* ======[ WHAT PROGRAM DOES FIT IN HERE ? ]====== */")
+		}
+		fmt.Printf("\n\n")
+
+
+
 		isCrr := true 
 		os.Remove("./generated/gene.c")
 		geneFi, err := os.OpenFile(
@@ -192,7 +197,7 @@ func query(id int){
 		)
 
 		if err := cpil.Run(); err != nil {
-			fmt.Println("ERROR ON195", err)
+			// fmt.Println("ERROR ON195:", err)
 			continue
 		}
 
@@ -211,7 +216,7 @@ func query(id int){
 		xqt.Stdout = resFi
 
 		if err := xqt.Run(); err != nil {
-			fmt.Println("ERROR ON 209", err)
+			// fmt.Println("ERROR ON 209", err)
 			continue
 		}
 
@@ -223,7 +228,7 @@ func query(id int){
 		}
 
 		if len(rslt) != len(targ) {
-			fmt.Println("ERROR ON 222", len(rslt), len(targ))
+			// fmt.Println("ERROR ON 222", len(rslt), len(targ))
 			continue
 		}
 
@@ -234,7 +239,8 @@ func query(id int){
 		}
 
 		if isCrr {
-			fmt.Println("CORRECT!", len(rslt), len(targ))
+			// fmt.Println("CORRECT!", len(rslt), len(targ))
+			fmt.Println("CORRECT!")
 			break
 		}
 		fmt.Println("WA", rslt, targ)
