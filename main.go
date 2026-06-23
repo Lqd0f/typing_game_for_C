@@ -140,6 +140,13 @@ func query(id int, round int){
 	stdScnr := bufio.NewScanner(os.Stdin)
 	for{
 
+		fmt.Printf("\033[1J")
+
+		fmt.Println("====== GOAL OF OUTPUT ======")
+		for i := range len(targ) {
+			fmt.Println(targ[i])
+		}
+		fmt.Println("============================\n")
 
 		for i := range src {
 			for _, ch := range src[i] {
@@ -163,8 +170,6 @@ func query(id int, round int){
 			fmt.Println("/* ======[ WHAT PROGRAM DOES FIT IN HERE ? ]====== */")
 		}
 		fmt.Printf("\n\n")
-
-
 
 		isCrr := true 
 		os.Remove("./generated/gene.c")
@@ -207,6 +212,7 @@ func query(id int, round int){
 
 		if err := cpil.Run(); err != nil {
 			// fmt.Println("ERROR ON195:", err)
+			fmt.Printf("\a")
 			continue
 		}
 
@@ -226,6 +232,7 @@ func query(id int, round int){
 
 		if err := xqt.Run(); err != nil {
 			// fmt.Println("ERROR ON 209", err)
+			fmt.Printf("\a")
 			continue
 		}
 
@@ -238,6 +245,7 @@ func query(id int, round int){
 
 		if len(rslt) != len(targ) {
 			// fmt.Println("ERROR ON 222", len(rslt), len(targ))
+			fmt.Printf("\a")
 			continue
 		}
 
@@ -252,6 +260,6 @@ func query(id int, round int){
 			fmt.Println("CORRECT!")
 			break
 		}
-		fmt.Println("WA", rslt, targ)
+		//fmt.Println("WA", rslt, targ)
 	}
 }
