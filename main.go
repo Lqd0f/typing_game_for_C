@@ -1,10 +1,10 @@
 package main
 
 import(
-
 	"os"
 	"os/exec"
 	"fmt"
+  "time"
 	"math/rand/v2"
 	"bufio"
 )
@@ -35,10 +35,10 @@ func initi()(int, error){
 	return cnt, nil
 }
 
-func game()error{
+func game() error {
+	clearScreen := "\033[2J\033[H"
 
 	dirCnt, err := initi()
-
 	if err != nil {
 		return err
 	}
@@ -50,9 +50,18 @@ func game()error{
 
 	shfl(order);
 
+	allStart := time.Now()
+
 	for i := range ROUND {
-		query(order[i])
+		fmt.Print(clearScreen)
+		query(order[i], i)
 	}
+
+	fmt.Print(clearScreen)
+	fmt.Println("=====================================")
+	fmt.Println("            GAME CLEAR !!            ")
+	fmt.Println("=====================================")
+	fmt.Printf("ALL process time! : %.6f 秒\n", time.Since(allStart).Seconds())
 
 	return nil
 }
@@ -66,7 +75,7 @@ func shfl(ar []int){
 	}
 }
 
-func query(id int){
+func query(id int, round int){
 
 	dirNm := fmt.Sprintf("./problems/p%d/", id)
 
